@@ -16,7 +16,16 @@ def display_thread_messages(messages):
         print(thread_message.content[0].text.value)
         print("\n")
 
+def display_run_steps(thread, run):
+    run_steps = client.beta.threads.runs.steps.list(thread_id=thread.id, run_id=run.id)
+    for step in run_steps:
+        print(step.step_details
 
+              )
+
+
+# To delete the assistant
+# response = client.beta.assistants.delete(assistant.id)
 # STEP 1 - Create the assistant
 assistant = client.beta.assistants.create(name="Mortgage Bot",
                                           instructions='You use Python code to help answer questions about mortgage and interest payments.',
@@ -60,3 +69,4 @@ messages = client.beta.threads.messages.list(thread_id=thread.id,
                                              order='asc',
                                              after=message.id,)
 display_thread_messages(messages)
+
